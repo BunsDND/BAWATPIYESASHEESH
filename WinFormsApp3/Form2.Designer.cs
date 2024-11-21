@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
-            textBox1 = new TextBox();
-            maskedTextBox1 = new MaskedTextBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
+            enter = new Button();
             label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            password = new MaskedTextBox();
+            username = new TextBox();
+            pictureBox1 = new PictureBox();
+            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -43,73 +45,30 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(enter);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(maskedTextBox1);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(password);
+            panel1.Controls.Add(username);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(248, 32);
             panel1.Name = "panel1";
             panel1.Size = new Size(326, 364);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // enter
             // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.piyesa;
-            pictureBox1.Location = new Point(76, 22);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(177, 112);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = SystemColors.ScrollBar;
-            textBox1.Location = new Point(59, 191);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(194, 23);
-            textBox1.TabIndex = 1;
-            // 
-            // maskedTextBox1
-            // 
-            maskedTextBox1.BackColor = SystemColors.ScrollBar;
-            maskedTextBox1.Location = new Point(59, 252);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.PasswordChar = '*';
-            maskedTextBox1.Size = new Size(194, 23);
-            maskedTextBox1.TabIndex = 2;
-            maskedTextBox1.UseSystemPasswordChar = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(59, 173);
-            label1.Name = "label1";
-            label1.Size = new Size(63, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Username:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(59, 234);
-            label2.Name = "label2";
-            label2.Size = new Size(60, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Password:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(76, 302);
-            label3.Name = "label3";
-            label3.Size = new Size(126, 15);
-            label3.TabIndex = 5;
-            label3.Text = "Make another account";
+            enter.BackColor = Color.PaleGreen;
+            enter.Location = new Point(105, 329);
+            enter.Name = "enter";
+            enter.Size = new Size(75, 23);
+            enter.TabIndex = 7;
+            enter.Text = "ENTER";
+            enter.UseVisualStyleBackColor = false;
+            enter.Click += enter_Click;
             // 
             // label4
             // 
@@ -122,6 +81,73 @@
             label4.Size = new Size(33, 15);
             label4.TabIndex = 6;
             label4.Text = "here.";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(76, 302);
+            label3.Name = "label3";
+            label3.Size = new Size(126, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Make another account";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(59, 234);
+            label2.Name = "label2";
+            label2.Size = new Size(60, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Password:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(59, 173);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Username:";
+            // 
+            // password
+            // 
+            password.BackColor = SystemColors.ScrollBar;
+            password.Location = new Point(59, 252);
+            password.Name = "password";
+            password.PasswordChar = '*';
+            password.Size = new Size(194, 23);
+            password.TabIndex = 2;
+            password.UseSystemPasswordChar = true;
+            // 
+            // username
+            // 
+            username.BackColor = SystemColors.ScrollBar;
+            username.Location = new Point(59, 191);
+            username.Name = "username";
+            username.Size = new Size(194, 23);
+            username.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Image = Properties.Resources.piyesa;
+            pictureBox1.Location = new Point(76, 22);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(177, 112);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(59, 149);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 15);
+            label5.TabIndex = 8;
+            label5.Click += label5_Click;
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+
             // 
             // Form2
             // 
@@ -145,7 +171,9 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private MaskedTextBox maskedTextBox1;
-        private TextBox textBox1;
+        private MaskedTextBox password;
+        private TextBox username;
+        private Button enter;
+        private Label label5;
     }
 }

@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            enter = new Button();
             SuspendLayout();
             // 
-            // pictureBox1
+            // enter
             // 
-            pictureBox1.Image = Properties.Resources.piyesa;
-            pictureBox1.Location = new Point(217, 116);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(351, 167);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            enter.BackgroundImage = Properties.Resources.piyesa;
+            enter.ForeColor = SystemColors.ControlLightLight;
+            enter.Location = new Point(223, 129);
+            enter.Name = "enter";
+            enter.Size = new Size(351, 168);
+            enter.TabIndex = 1;
+            enter.UseVisualStyleBackColor = true;
+            enter.Click += enter_Click;
             // 
             // Form1
             // 
@@ -47,15 +48,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(800, 450);
-            Controls.Add(pictureBox1);
+            Controls.Add(enter);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private PictureBox pictureBox1;
+        private Button enter;
     }
 }

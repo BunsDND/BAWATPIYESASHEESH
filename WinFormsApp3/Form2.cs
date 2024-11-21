@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using MySql.Data.MySqlClient;
+
 
 namespace WinFormsApp3
 {
@@ -15,6 +8,59 @@ namespace WinFormsApp3
         public Form2()
         {
             InitializeComponent();
+        }
+
+        private void enter_Click(object sender, EventArgs e)
+        {
+            //2.
+            string dbcred = "server=localhost; database=bawat_piyesa; userid=root; password=''";
+            using (MySqlConnection conn = new MySqlConnection(dbcred))
+            {
+                try
+                {
+                    // Open connection
+                    conn.Open();
+
+                    // Query to check credentials and retrieve user data
+                    string query = "SELECT u_id, u_name FROM user WHERE u_name=@username AND u_pass=@password LIMIT 1;";
+                    MySqlCommand sql = new MySqlCommand(query, conn);
+
+                    // Add parameters to prevent SQL injection
+                    sql.Parameters.AddWithValue("@username", username.Text);
+                    sql.Parameters.AddWithValue("@password", password.Text);
+
+                    // Execute the query
+                    MySqlDataReader reader = sql.ExecuteReader();
+
+                    // Check if a record exists
+                    if (reader.Read())
+                    {
+                        string u_id = reader["u_id"].ToString();
+                        string u_name = reader["u_name"].ToString();
+
+                        // Create a new Form3 instance and pass u_name and u_id
+                        Form3 dashboard = new Form3(u_name, u_id);
+                        dashboard.Show();
+                        this.Hide(); // Hide the current form
+                    }
+                    else
+                    {
+                        // Display error message
+                        label5.Text = "Invalid Username or Password";
+                        MessageBox.Show("Invalid Username or Password");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions
+                    MessageBox.Show($"Error: {ex.Message}", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
