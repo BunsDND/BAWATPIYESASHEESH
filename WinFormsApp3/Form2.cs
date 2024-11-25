@@ -39,7 +39,7 @@ namespace WinFormsApp3
                         string u_name = reader["u_name"].ToString();
                         string name = reader["name"].ToString();
                         string pos = reader["position"].ToString();
-
+                        //fhfghgh
                         // Create a new Form3 instance and pass u_name and u_id
                         Form3 dashboard = new Form3(u_name, u_id, name, pos);
                         dashboard.Show();
