@@ -26,7 +26,7 @@ namespace WinFormsApp3
             userId = u_id;
             fname = name;
             position = pos;
-            
+
             label16.Text = fname; // u_name
             label17.Text = userId;
             label18.Text = position;// u_id
@@ -125,6 +125,11 @@ namespace WinFormsApp3
         private void codeBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 

@@ -163,6 +163,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
             Text = "Form2";
+            FormClosed += Form2_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
