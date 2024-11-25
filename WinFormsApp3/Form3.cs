@@ -14,16 +14,22 @@ namespace WinFormsApp3
     public partial class Form3 : Form
     {
         private string userName; // To store the logged-in username
-        private string userId;   // To store the logged-in user ID
+        private string userId;
+        private string fname;
+        private string position;// To store the logged-in user ID
 
         // Constructor to accept user data
-        public Form3(string u_name, string u_id)
+        public Form3(string u_name, string u_id, string name, string pos)
         {
             InitializeComponent();
             userName = u_name;
             userId = u_id;
-            label16.Text = userName; // u_name
-            label17.Text = userId;   // u_id
+            fname = name;
+            position = pos;
+            
+            label16.Text = fname; // u_name
+            label17.Text = userId;
+            label18.Text = position;// u_id
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -109,6 +115,16 @@ namespace WinFormsApp3
         private void bdel_Click(object sender, EventArgs e)
         {
             codeBox.Text = String.Empty;
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void codeBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -34,21 +34,24 @@
             // enter
             // 
             enter.BackgroundImage = Properties.Resources.piyesa;
+            enter.BackgroundImageLayout = ImageLayout.Zoom;
             enter.ForeColor = SystemColors.ControlLightLight;
-            enter.Location = new Point(223, 129);
+            enter.Location = new Point(255, 172);
+            enter.Margin = new Padding(3, 4, 3, 4);
             enter.Name = "enter";
-            enter.Size = new Size(351, 168);
+            enter.Size = new Size(401, 224);
             enter.TabIndex = 1;
             enter.UseVisualStyleBackColor = true;
             enter.Click += enter_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(enter);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);

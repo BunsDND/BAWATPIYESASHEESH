@@ -22,7 +22,7 @@ namespace WinFormsApp3
                     conn.Open();
 
                     // Query to check credentials and retrieve user data
-                    string query = "SELECT u_id, u_name FROM user WHERE u_name=@username AND u_pass=@password LIMIT 1;";
+                    string query = "SELECT u_id, u_name, name, position FROM users WHERE u_name=@username AND u_pass=@password LIMIT 1;";
                     MySqlCommand sql = new MySqlCommand(query, conn);
 
                     // Add parameters to prevent SQL injection
@@ -37,9 +37,11 @@ namespace WinFormsApp3
                     {
                         string u_id = reader["u_id"].ToString();
                         string u_name = reader["u_name"].ToString();
+                        string name = reader["name"].ToString();
+                        string pos = reader["position"].ToString();
 
                         // Create a new Form3 instance and pass u_name and u_id
-                        Form3 dashboard = new Form3(u_name, u_id);
+                        Form3 dashboard = new Form3(u_name, u_id, name, pos);
                         dashboard.Show();
                         this.Hide(); // Hide the current form
                     }
@@ -59,6 +61,11 @@ namespace WinFormsApp3
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
