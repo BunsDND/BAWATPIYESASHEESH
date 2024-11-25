@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             panel1 = new Panel();
             label5 = new Label();
             enter = new Button();
@@ -44,7 +45,9 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.White;
+            panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(label5);
             panel1.Controls.Add(enter);
             panel1.Controls.Add(label4);
@@ -158,11 +161,15 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(914, 600);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
             Text = "Form2";
+            WindowState = FormWindowState.Maximized;
             FormClosed += Form2_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
