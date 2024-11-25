@@ -33,6 +33,7 @@
             // 
             // enter
             // 
+            enter.Anchor = AnchorStyles.None;
             enter.BackgroundImage = Properties.Resources.piyesa;
             enter.BackgroundImageLayout = ImageLayout.Zoom;
             enter.ForeColor = SystemColors.ControlLightLight;
@@ -54,6 +55,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
         }
 
