@@ -17,11 +17,12 @@ namespace WinFormsApp3
         private string userName; // To store the logged-in username
         private string userId;
         private string fname;
-        private string position;// To store the logged-in user ID
-         private string connectionString = "server=localhost; database=bawat_piyesa; userid=root; password=''";
+        private string position;
+        private byte[] _pic;// To store the logged-in user ID
+        private string connectionString = "server=localhost; database=bawat_piyesa; userid=root; password=''";
 
         // Constructor to accept user data
-        public Form3(string u_name, string u_id, string name, string pos)
+        public Form3(string u_name, string u_id, string name, string pos, byte[] pic)
         {
             InitializeComponent();
             btnRimset.Click += (s, e) => LoadData("rimset");
@@ -30,17 +31,43 @@ namespace WinFormsApp3
             btnHandle.Click += (s, e) => LoadData("Handle Bar");
             btnPipe.Click += (s, e) => LoadData("ORBR Pipe");
             btnSproket.Click += (s, e) => LoadData("sproket");
-            btnAll.Click += (s, e) => LoadData("rimset","Bolt", "swing arm", "handle bar", "orbr pipe", "sproket");
+            btnAll.Click += (s, e) => LoadData("rimset", "Bolt", "swing arm", "handle bar", "orbr pipe", "sproket");
 
 
             userName = u_name;
             userId = u_id;
             fname = name;
             position = pos;
+            _pic = pic;
+
+            if (_pic != null && _pic.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream(_pic))
+                {
+                    pictureBox10.Image = Image.FromStream(ms);
+
+                    // Set the SizeMode to StretchImage or Zoom to fit the image within the PictureBox
+                    pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage; // Stretch the image to fit
+                                                                             // or
+                                                                             // pictureBox10.SizeMode = PictureBoxSizeMode.Zoom; // Maintain aspect ratio while fitting
+                }
+            }
+            else
+            {
+                // Optionally handle the case where the picture is null or empty
+                pictureBox10.Image = null; // Or set a default image
+            }
 
             label16.Text = fname; // u_name
             label17.Text = userId;
             label18.Text = position;// u_id
+            label16.Anchor = AnchorStyles.None;
+            label16.Location = new Point((panel3.Width - label16.Width) / 2, (panel3.Height - label16.Height) / 2);
+            label17.Anchor = AnchorStyles.None;
+            label17.Location = new Point((panel3.Width - label17.Width) / 2, (panel3.Height - label17.Height) / 2 + 30); // Adjust Y to add spacing
+            label18.Anchor = AnchorStyles.None;
+            label18.Location = new Point((panel3.Width - label18.Width) / 2, (panel3.Height - label18.Height) / 2 + 60); // Adjust Y to add spacing
+
         }
         private void LoadData(params string[] categories)
         {
@@ -97,7 +124,7 @@ namespace WinFormsApp3
                                         button.BackColor = ColorTranslator.FromHtml("#8f86f9");
                                         break;
                                     case "Bolt":
-                                        button.BackColor = ColorTranslator.FromHtml("#f986f9");
+                                        button.BackColor = ColorTranslator.FromHtml("#f9a6f9");
                                         break;
                                     default:
                                         button.BackColor = Color.White; // Default color if no match
@@ -131,9 +158,9 @@ namespace WinFormsApp3
                                     Font = new Font("Arial", 14, FontStyle.Bold),
                                     TextAlign = ContentAlignment.MiddleCenter,
                                     Dock = DockStyle.None,
-                                    Location = new Point(0, pictureBox.Bottom + 10),
+                                    Location = new Point(5, pictureBox.Bottom + 10),
                                     AutoSize = false,
-                                    Size = new Size(button.Width, 25)
+                                   Size = new Size(button.Width, 25)
                                 };
 
                                 // Add the name label to the button
@@ -146,7 +173,7 @@ namespace WinFormsApp3
                                     Font = new Font("Arial", 12, FontStyle.Regular),
                                     TextAlign = ContentAlignment.MiddleCenter,
                                     Dock = DockStyle.None,
-                                    Location = new Point(0, nameLabel.Bottom + 5),
+                                    Location = new Point(5, nameLabel.Bottom + 5),
                                     AutoSize = false,
                                     Size = new Size(button.Width, 20)
                                 };
@@ -191,7 +218,7 @@ namespace WinFormsApp3
         private void Form3_Load(object sender, EventArgs e)
         {
             // Display user data on the labels
-           
+
 
         }
 
@@ -291,9 +318,7 @@ namespace WinFormsApp3
 
         private void button23_Click(object sender, EventArgs e)
         {
-            Form4 dashboard = new Form4();
-            dashboard.Show();
-            this.Hide();
+            
         }
 
         private void label24_Click(object sender, EventArgs e)
@@ -311,7 +336,7 @@ namespace WinFormsApp3
 
         }
 
-        
+
         private void showpanel()
         {
             panel1.Visible = true;
@@ -320,8 +345,13 @@ namespace WinFormsApp3
         {
             panel1.Visible = false;
         }
-        
-private void calenter_Click(object sender, EventArgs e)
+
+        private void calenter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form3_Load_1(object sender, EventArgs e)
         {
 
         }

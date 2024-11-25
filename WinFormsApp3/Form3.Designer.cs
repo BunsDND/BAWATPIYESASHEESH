@@ -38,11 +38,12 @@
             btnSwing = new Button();
             btnAll = new Button();
             splitContainer1 = new SplitContainer();
-            label20 = new Label();
-            label19 = new Label();
+            panel3 = new Panel();
             label18 = new Label();
             label17 = new Label();
             label16 = new Label();
+            label20 = new Label();
+            label19 = new Label();
             pictureBox10 = new PictureBox();
             calenter = new Button();
             bdot = new Button();
@@ -72,6 +73,7 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -195,11 +197,9 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = Color.LightGray;
+            splitContainer1.Panel1.Controls.Add(panel3);
             splitContainer1.Panel1.Controls.Add(label20);
             splitContainer1.Panel1.Controls.Add(label19);
-            splitContainer1.Panel1.Controls.Add(label18);
-            splitContainer1.Panel1.Controls.Add(label17);
-            splitContainer1.Panel1.Controls.Add(label16);
             splitContainer1.Panel1.Controls.Add(pictureBox10);
             splitContainer1.Panel1.Controls.Add(calenter);
             splitContainer1.Panel1.Controls.Add(bdot);
@@ -229,10 +229,55 @@
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 1;
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(label18);
+            panel3.Controls.Add(label17);
+            panel3.Controls.Add(label16);
+            panel3.Location = new Point(164, 638);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(285, 191);
+            panel3.TabIndex = 24;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label18.Location = new Point(106, 108);
+            label18.Name = "label18";
+            label18.Size = new Size(60, 20);
+            label18.TabIndex = 21;
+            label18.Text = "label18";
+            label18.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 10F);
+            label17.Location = new Point(106, 70);
+            label17.Name = "label17";
+            label17.Size = new Size(64, 23);
+            label17.TabIndex = 20;
+            label17.Text = "label17";
+            label17.TextAlign = ContentAlignment.MiddleCenter;
+            label17.Click += label17_Click;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            label16.Location = new Point(14, 35);
+            label16.Name = "label16";
+            label16.Size = new Size(230, 30);
+            label16.TabIndex = 19;
+            label16.Text = "Vanni Louise Tanutan";
+            label16.TextAlign = ContentAlignment.MiddleCenter;
+            label16.Click += label16_Click;
+            // 
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(211, 932);
+            label20.Location = new Point(324, 881);
             label20.Name = "label20";
             label20.Size = new Size(58, 20);
             label20.TabIndex = 23;
@@ -247,44 +292,14 @@
             label19.TabIndex = 22;
             label19.Text = "label19";
             // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label18.Location = new Point(266, 773);
-            label18.Name = "label18";
-            label18.Size = new Size(60, 20);
-            label18.TabIndex = 21;
-            label18.Text = "label18";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 10F);
-            label17.Location = new Point(266, 738);
-            label17.Name = "label17";
-            label17.Size = new Size(64, 23);
-            label17.TabIndex = 20;
-            label17.Text = "label17";
-            label17.Click += label17_Click;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            label16.Location = new Point(174, 693);
-            label16.Name = "label16";
-            label16.Size = new Size(263, 35);
-            label16.TabIndex = 19;
-            label16.Text = "Vanni Louise Tanutan";
-            label16.Click += label16_Click;
-            // 
             // pictureBox10
             // 
-            pictureBox10.Location = new Point(11, 681);
+            pictureBox10.BackgroundImage = Properties.Resources.piyesa;
+            pictureBox10.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox10.Location = new Point(15, 681);
             pictureBox10.Margin = new Padding(3, 4, 3, 4);
             pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(143, 162);
+            pictureBox10.Size = new Size(143, 148);
             pictureBox10.TabIndex = 18;
             pictureBox10.TabStop = false;
             // 
@@ -565,12 +580,15 @@
             Text = "Form3";
             WindowState = FormWindowState.Maximized;
             FormClosed += Form3_FormClosed;
+            Load += Form3_Load_1;
             panel1.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -635,5 +653,6 @@
         private Button button23;
         private Label label25;
         private Label label26;
+        private Panel panel3;
     }
 }

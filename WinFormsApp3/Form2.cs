@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Reflection.Metadata;
+using MySql.Data.MySqlClient;
 
 
 namespace WinFormsApp3
@@ -12,7 +13,7 @@ namespace WinFormsApp3
 
         private void enter_Click(object sender, EventArgs e)
         {
-            //2.
+            // Database credentials
             string dbcred = "server=localhost; database=bawat_piyesa; userid=root; password=''";
             using (MySqlConnection conn = new MySqlConnection(dbcred))
             {
@@ -22,7 +23,7 @@ namespace WinFormsApp3
                     conn.Open();
 
                     // Query to check credentials and retrieve user data
-                    string query = "SELECT u_id, u_name, name, position FROM users WHERE u_name=@username AND u_pass=@password LIMIT 1;";
+                    string query = "SELECT u_id, u_name, name, position, u_image FROM users WHERE u_name=@username AND u_pass=@password LIMIT 1;";
                     MySqlCommand sql = new MySqlCommand(query, conn);
 
                     // Add parameters to prevent SQL injection
@@ -38,16 +39,31 @@ namespace WinFormsApp3
                         string u_id = reader["u_id"].ToString();
                         string u_name = reader["u_name"].ToString();
                         string name = reader["name"].ToString();
-                        string pos = reader["position"].ToString();
-                        //fhfghgh
-                        // Create a new Form3 instance and pass u_name and u_id
-                        Form3 dashboard = new Form3(u_name, u_id, name, pos);
-                        dashboard.Show();
+                        string pos = reader["position"].ToString(); // Get position
+                        byte[] pic = (byte[])reader["u_image"];
+
+                        // Check position and open the appropriate form
+                        if (pos.ToLower() == "admin") // Case insensitive comparison for admin
+                        {
+                            Form4 adminForm = new Form4 (u_name, u_id, name, pos, pic);
+                            adminForm.Show();
+                        }
+                        else if (pos.ToLower() == "cashier") // Case insensitive comparison for cashier
+                        {
+                            Form3 cashierForm = new Form3(u_name, u_id, name, pos, pic);
+                            cashierForm.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Position", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
                         this.Hide(); // Hide the current form
                     }
                     else
                     {
-                        // Display error message
+                        // Display error message if no record is found
                         label5.Text = "Invalid Username or Password";
                         MessageBox.Show("Invalid Username or Password");
                     }
@@ -59,6 +75,7 @@ namespace WinFormsApp3
                 }
             }
         }
+
 
         private void label5_Click(object sender, EventArgs e)
         {
