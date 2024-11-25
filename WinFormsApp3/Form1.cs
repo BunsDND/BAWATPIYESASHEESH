@@ -12,7 +12,7 @@ namespace WinFormsApp3
         {
 
         }
-
+        //sdfsdfdsfd
         private void enter_Click(object sender, EventArgs e)
         {
             Form2 dashboard = new Form2();
