@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace WinFormsApp3
 {
@@ -130,6 +131,13 @@ namespace WinFormsApp3
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            Form4 dashboard = new Form4();
+            dashboard.Show();
+            this.Hide();
         }
     }
 
