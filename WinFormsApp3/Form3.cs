@@ -12,6 +12,7 @@ using System.Xml.Linq;
 
 namespace WinFormsApp3
 {
+
     public partial class Form3 : Form
     {
         private int price; 
@@ -165,22 +166,28 @@ namespace WinFormsApp3
                                     Dock = DockStyle.None,
                                     Location = new Point(5, pictureBox.Bottom + 10),
                                     AutoSize = false,
-                                    Size = new Size(button.Width, 25)
+                                    Size = new Size(button.Width, 25),
+                                    BackColor = System.Drawing.Color.Transparent
                                 };
 
                                 // Add the name label to the button
                                 button.Controls.Add(nameLabel);
-
+                                if (!decimal.TryParse(pPrice, out decimal priceDecimal))
+                                {
+                                    MessageBox.Show("Invalid price format.");
+                                    return;
+                                }
                                 // Create and configure the label for the product price
                                 var priceLabel = new Label
                                 {
-                                    Text = $"P: {pPrice}",
+                                    Text = $"{priceDecimal:C}",
                                     Font = new Font("Arial", 12, FontStyle.Regular),
                                     TextAlign = ContentAlignment.MiddleCenter,
                                     Dock = DockStyle.None,
                                     Location = new Point(5, nameLabel.Bottom + 5),
                                     AutoSize = false,
-                                    Size = new Size(button.Width, 20)
+                                    Size = new Size(button.Width, 20),
+                                    BackColor = System.Drawing.Color.Transparent
                                 };
 
                                 // Add the price label to the button
@@ -215,9 +222,22 @@ namespace WinFormsApp3
             }
         }
 
-
+        private decimal totalPrice = 0m;
+        private Label lbl_total = new Label();
         public void AddProductToPanel(string productName, string productPrice, int quantity)
         {
+            // Convert productPrice to decimal for calculation
+            if (!decimal.TryParse(productPrice, out decimal priceDecimal))
+            {
+                MessageBox.Show("Invalid price format.");
+                return;
+            }
+
+            // Update the total price
+            totalPrice += priceDecimal * quantity; // Assuming quantity is a multiplier for the price
+
+            // Update lbl_total text
+            lbl_total.Text = $"Total: {totalPrice:C}"; //
             // Create a new TableLayoutPanel for the product entry
             TableLayoutPanel productPanel = new TableLayoutPanel
             {
@@ -256,7 +276,7 @@ namespace WinFormsApp3
 
             Label priceLabel = new Label
             {
-                Text = productPrice,
+                Text = $"{priceDecimal:C}",
                 Size = new Size(133, 50),
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 Margin = new Padding(5),
@@ -276,6 +296,17 @@ namespace WinFormsApp3
 
             // Add the TableLayoutPanel to the parent panel
             flowLayoutPanel2.Controls.Add(productPanel);
+
+            if (!panel4.Controls.Contains(lbl_total))
+            {
+                lbl_total.Font = new Font("Arial", 14, FontStyle.Bold);
+                lbl_total.AutoSize = true;
+                panel4.Controls.Add(lbl_total);
+            }
+
+            // Update the total label
+            lbl_total.Text = $"Total: {totalPrice:C}";
+
         }
 
         private void btnAll_Click(object sender, EventArgs e)
@@ -309,6 +340,38 @@ namespace WinFormsApp3
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+
+        private Product GetProductDetails(int pId)
+        {
+            Product product = null;
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT p_name, p_price, p_image, p_stock FROM piyesa WHERE p_id = @pId";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@pId", pId);
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            product = new Product
+                            {
+                                Name = reader["p_name"].ToString(),
+                                Price = reader["p_price"].ToString(),
+                                Image = reader["p_image"] as byte[], // Assuming p_image is a binary field
+                                Stock = Convert.ToInt32(reader["p_stock"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return product;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -432,7 +495,35 @@ namespace WinFormsApp3
 
         private void calenter_Click(object sender, EventArgs e)
         {
+            // Attempt to parse the product ID from the codeBox
+            if (int.TryParse(codeBox.Text, out int pId))
+            {
+                // Retrieve product details from the database
+                var productDetails = GetProductDetails(pId);
+                if (productDetails != null)
+                {
+                    // Create an instance of Form5 and pass the product details
+                    Form5 form5 = new Form5(
+                        productDetails.Name,
+                        productDetails.Price,
+                        productDetails.Image,
+                        productDetails.Stock,
+                        Convert.ToInt32(productDetails.Price), // Assuming priceo is the same as price
+                        this // Pass the current Form3 instance
+                    );
 
+                    // Show Form5
+                    form5.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid product ID.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void Form3_Load_1(object sender, EventArgs e)

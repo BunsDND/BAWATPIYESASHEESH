@@ -71,9 +71,15 @@ namespace WinFormsApp3
 
         private void UpdateProductDetails(string productName, string productPrice, byte[] imageBytes, int stock, int priceo)
         {
+            if (!decimal.TryParse(productPrice, out decimal priceDecimal))
+            {
+                MessageBox.Show("Invalid price format.");
+                return;
+            }
+
             lbl_brand.Text = productName;
-            lbl_price.Text = productPrice;
-            lbl_stock.Text = $"Stock: {stock}";
+            lbl_price.Text = $"{priceDecimal:C}";
+            lbl_stock.Text = $"{stock}";
 
             // Load image if available
             if (imageBytes != null && imageBytes.Length > 0)
@@ -104,22 +110,30 @@ namespace WinFormsApp3
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
-            pila = Convert.ToInt32(quant.Text);
-            if (pila > p_stock)
+            // Attempt to parse the quantity entered by the user
+            if (int.TryParse(quant.Text, out pila))
             {
+                // Check if the quantity exceeds the available stock
+                if (pila > p_stock)
+                {
+                    // Reload the current form to show that the quantity exceeds stock
+                    ReloadData(name, price, _pic, p_stock, priceo);
+                    MessageBox.Show("Quantity exceeds available stock.", "Stock Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    // If the quantity is valid, proceed to add the product
+                    _form3.AddProductToPanel(name, price, pila);
 
-                var newForm = new Form5(name, price, _pic, p_stock, priceo, _form3); // Replace 'MainForm' with your form's name
-                newForm.Show();
-
-
-                
-
-            }_form3.AddProductToPanel(name, price, pila);
-                //string u_name, string u_id, string name, string pos, byte[] pic, int price
-
-                // Close the current form
-
-                this.Close();
+                    // Close the current form
+                    this.Close();
+                }
+            }
+            else
+            {
+                // Handle the case where the quantity is not a valid number
+                MessageBox.Show("Please enter a valid quantity.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void Form5_Leave(object sender, EventArgs e)

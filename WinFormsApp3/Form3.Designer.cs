@@ -63,6 +63,8 @@
             b7 = new Button();
             codeBox = new TextBox();
             panel2 = new Panel();
+            btn_checkout = new Button();
+            panel4 = new Panel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             label26 = new Label();
             label25 = new Label();
@@ -506,6 +508,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btn_checkout);
+            panel2.Controls.Add(panel4);
             panel2.Controls.Add(flowLayoutPanel2);
             panel2.Controls.Add(label26);
             panel2.Controls.Add(label25);
@@ -516,11 +520,30 @@
             panel2.Size = new Size(418, 955);
             panel2.TabIndex = 1;
             // 
+            // btn_checkout
+            // 
+            btn_checkout.BackColor = Color.LightCoral;
+            btn_checkout.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btn_checkout.ForeColor = SystemColors.ControlText;
+            btn_checkout.Location = new Point(96, 822);
+            btn_checkout.Name = "btn_checkout";
+            btn_checkout.Size = new Size(248, 57);
+            btn_checkout.TabIndex = 3;
+            btn_checkout.Text = "CHECK OUT";
+            btn_checkout.UseVisualStyleBackColor = false;
+            // 
+            // panel4
+            // 
+            panel4.Location = new Point(0, 729);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(412, 74);
+            panel4.TabIndex = 2;
+            // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.Location = new Point(3, 53);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(412, 777);
+            flowLayoutPanel2.Size = new Size(412, 670);
             flowLayoutPanel2.TabIndex = 1;
             // 
             // label26
@@ -664,5 +687,7 @@
         private Label label26;
         private Panel panel3;
         private FlowLayoutPanel flowLayoutPanel2;
+        private Panel panel4;
+        private Button btn_checkout;
     }
 }

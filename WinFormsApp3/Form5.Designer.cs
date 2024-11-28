@@ -143,7 +143,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(364, 503);
             Controls.Add(panel1);
+            MaximumSize = new Size(382, 550);
+            MinimumSize = new Size(382, 550);
             Name = "Form5";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form5";
             Leave += Form5_Leave;
             panel1.ResumeLayout(false);
