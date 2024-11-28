@@ -14,15 +14,17 @@ namespace WinFormsApp3
 {
     public partial class Form3 : Form
     {
+        private int price; 
         private string userName; // To store the logged-in username
         private string userId;
         private string fname;
         private string position;
+        private int priceo;
         private byte[] _pic;// To store the logged-in user ID
         private string connectionString = "server=localhost; database=bawat_piyesa; userid=root; password=''";
 
         // Constructor to accept user data
-        public Form3(string u_name, string u_id, string name, string pos, byte[] pic)
+        public Form3(string u_name, string u_id, string name, string pos, byte[] pic, int price)
         {
             InitializeComponent();
             btnRimset.Click += (s, e) => LoadData("rimset");
@@ -69,6 +71,9 @@ namespace WinFormsApp3
             label18.Location = new Point((panel3.Width - label18.Width) / 2, (panel3.Height - label18.Height) / 2 + 60); // Adjust Y to add spacing
 
         }
+        // Declare a Form5 instance variable at the class level
+        private Form5 form5Instance = null;
+
         private void LoadData(params string[] categories)
         {
             flowLayoutPanel1.Controls.Clear(); // Clear existing items
@@ -78,7 +83,7 @@ namespace WinFormsApp3
                 try
                 {
                     connection.Open();
-                    string query = "SELECT p_name, p_price, p_image, p_cat FROM piyesa";
+                    string query = "SELECT p_name, p_price, p_image, p_cat, p_stock FROM piyesa";
 
                     // If categories are specified, filter by them
                     if (categories.Length > 0)
@@ -95,6 +100,7 @@ namespace WinFormsApp3
                                 string pCat = reader["p_cat"].ToString();
                                 string pName = reader["p_name"].ToString();
                                 string pPrice = reader["p_price"].ToString();
+                                int pStock = Convert.ToInt32(reader["p_stock"]);
                                 byte[] imageBytes = reader["p_image"] as byte[]; // Assuming p_image is a binary field
 
                                 var button = new Button
@@ -102,7 +108,6 @@ namespace WinFormsApp3
                                     Size = new Size(300, 350),
                                     Padding = new Padding(5),
                                     Margin = new Padding(5),
-                                    //orderStyle = BorderStyle.FixedSingle
                                 };
 
                                 // Set panel background color based on the product name
@@ -127,7 +132,7 @@ namespace WinFormsApp3
                                         button.BackColor = ColorTranslator.FromHtml("#f9a6f9");
                                         break;
                                     default:
-                                        button.BackColor = Color.White; // Default color if no match
+                                        button.BackColor = Color.White;
                                         break;
                                 }
 
@@ -160,7 +165,7 @@ namespace WinFormsApp3
                                     Dock = DockStyle.None,
                                     Location = new Point(5, pictureBox.Bottom + 10),
                                     AutoSize = false,
-                                   Size = new Size(button.Width, 25)
+                                    Size = new Size(button.Width, 25)
                                 };
 
                                 // Add the name label to the button
@@ -181,6 +186,22 @@ namespace WinFormsApp3
                                 // Add the price label to the button
                                 button.Controls.Add(priceLabel);
 
+                                // Add click event to open Form5 with product details
+                                button.Click += (s, e) =>
+                                {
+                                    // If Form5 is already open, just refresh it
+                                    if (form5Instance != null && !form5Instance.IsDisposed)
+                                    {
+                                        form5Instance.ReloadData(pName, pPrice, imageBytes, pStock, priceo);
+                                        form5Instance.Activate();
+                                    }
+                                    else
+                                    {
+                                        form5Instance = new Form5(pName, pPrice, imageBytes, pStock, priceo, this);
+                                        form5Instance.Show();
+                                    }
+                                };
+
                                 // Add the button to the flow layout
                                 flowLayoutPanel1.Controls.Add(button);
                             }
@@ -192,6 +213,69 @@ namespace WinFormsApp3
                     MessageBox.Show($"Error: {ex.Message}");
                 }
             }
+        }
+
+
+        public void AddProductToPanel(string productName, string productPrice, int quantity)
+        {
+            // Create a new TableLayoutPanel for the product entry
+            TableLayoutPanel productPanel = new TableLayoutPanel
+            {
+                AutoSize = true,
+
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                ColumnCount = 3, // Three columns for product name, quantity, and price
+                Dock = DockStyle.Top, // Align to the top of the parent panel
+                Margin = new Padding(0, 0, 0, 5) // Optional: Add space below each product panel
+            };
+            productPanel.BackColor = ColorTranslator.FromHtml("#E5E3D4");
+
+            // Set the column styles to allow space distribution
+            productPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F)); // Product Name
+            productPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F)); // Quantity
+            productPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F)); // Price
+
+            // Create labels for product name, quantity, and price
+            Label nameLabel = new Label
+            {
+                Text = productName,
+                Size = new Size(133, 50),
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                Margin = new Padding(5),
+                TextAlign = ContentAlignment.MiddleCenter// Space between labels
+            };
+
+            Label quantityLabel = new Label
+            {
+                Text = $"{quantity}",
+                Size = new Size(133, 50),
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                Margin = new Padding(5),
+                TextAlign = ContentAlignment.MiddleCenter// Space between labels
+            };
+
+            Label priceLabel = new Label
+            {
+                Text = productPrice,
+                Size = new Size(133, 50),
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                Margin = new Padding(5),
+                TextAlign = ContentAlignment.MiddleCenter // Space between labels
+            };
+
+            // Add labels to the TableLayoutPanel
+            productPanel.Controls.Add(nameLabel, 0, 0); // Column 0
+            productPanel.Controls.Add(quantityLabel, 1, 0); // Column 1
+            productPanel.Controls.Add(priceLabel, 2, 0); // Column 2
+
+            //nameLabel.BackColor = ColorTranslator.FromHtml("#8886f9");
+            //quantityLabel.BackColor = ColorTranslator.FromHtml("#8f86b9");
+            //priceLabel.BackColor = ColorTranslator.FromHtml("#8f86a9");
+
+
+
+            // Add the TableLayoutPanel to the parent panel
+            flowLayoutPanel2.Controls.Add(productPanel);
         }
 
         private void btnAll_Click(object sender, EventArgs e)

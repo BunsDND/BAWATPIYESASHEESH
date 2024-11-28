@@ -63,6 +63,7 @@
             b7 = new Button();
             codeBox = new TextBox();
             panel2 = new Panel();
+            flowLayoutPanel2 = new FlowLayoutPanel();
             label26 = new Label();
             label25 = new Label();
             label24 = new Label();
@@ -505,6 +506,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(flowLayoutPanel2);
             panel2.Controls.Add(label26);
             panel2.Controls.Add(label25);
             panel2.Controls.Add(label24);
@@ -514,11 +516,18 @@
             panel2.Size = new Size(418, 955);
             panel2.TabIndex = 1;
             // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Location = new Point(3, 53);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(412, 777);
+            flowLayoutPanel2.TabIndex = 1;
+            // 
             // label26
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label26.Location = new Point(352, 15);
+            label26.Location = new Point(338, 15);
             label26.Name = "label26";
             label26.Size = new Size(43, 20);
             label26.TabIndex = 0;
@@ -654,5 +663,6 @@
         private Label label25;
         private Label label26;
         private Panel panel3;
+        private FlowLayoutPanel flowLayoutPanel2;
     }
 }

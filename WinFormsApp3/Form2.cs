@@ -6,6 +6,9 @@ namespace WinFormsApp3
 {
     public partial class Form2 : Form
     {
+
+
+        private int priceo; 
         public Form2()
         {
             InitializeComponent();
@@ -50,7 +53,7 @@ namespace WinFormsApp3
                         }
                         else if (pos.ToLower() == "cashier") // Case insensitive comparison for cashier
                         {
-                            Form3 cashierForm = new Form3(u_name, u_id, name, pos, pic);
+                            Form3 cashierForm = new Form3(u_name, u_id, name, pos, pic,priceo );
                             cashierForm.Show();
                         }
                         else
