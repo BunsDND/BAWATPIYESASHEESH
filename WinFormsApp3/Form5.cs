@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using K4os.Compression.LZ4.Encoders;
+using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinFormsApp3
@@ -108,6 +109,41 @@ namespace WinFormsApp3
             }
         }
 
+        private void UpdateStockInDatabase(string productName, int newStock)
+        {
+            string connectionString = "server=localhost; database=bawat_piyesa; userid=root; password=''";
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "UPDATE piyesa SET p_stock = @newStock WHERE p_name = @productName";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@newStock", newStock);
+                        command.Parameters.AddWithValue("@productName", productName);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Stock updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update stock. Product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error updating stock: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
         private void btnEnter_Click(object sender, EventArgs e)
         {
             // Attempt to parse the quantity entered by the user
@@ -124,6 +160,12 @@ namespace WinFormsApp3
                 {
                     // If the quantity is valid, proceed to add the product
                     _form3.AddProductToPanel(name, price, pila);
+
+                    // Update the stock in the database
+                    UpdateStockInDatabase(name, p_stock - pila);
+
+                    // Call the reload method in Form3
+                    _form3.ReloadData();
 
                     // Close the current form
                     this.Close();

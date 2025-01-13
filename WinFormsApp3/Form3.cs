@@ -15,7 +15,7 @@ namespace WinFormsApp3
 
     public partial class Form3 : Form
     {
-        private int price; 
+        private decimal ttotal;
         private string userName; // To store the logged-in username
         private string userId;
         private string fname;
@@ -27,7 +27,14 @@ namespace WinFormsApp3
         // Constructor to accept user data
         public Form3(string u_name, string u_id, string name, string pos, byte[] pic, int price)
         {
+            position = pos;
             InitializeComponent();
+            if (position.ToLower() != "developer")
+            {
+                button23.Enabled = false; // Disable the button if not a developer
+                                          // Optionally, you can hide the button
+                button23.Visible = false;
+            }
             btnRimset.Click += (s, e) => LoadData("rimset");
             btnBolt.Click += (s, e) => LoadData("bolt");
             btnSwing.Click += (s, e) => LoadData("Swing Arm");
@@ -222,6 +229,8 @@ namespace WinFormsApp3
             }
         }
 
+
+
         private decimal totalPrice = 0m;
         private Label lbl_total = new Label();
         public void AddProductToPanel(string productName, string productPrice, int quantity)
@@ -246,7 +255,7 @@ namespace WinFormsApp3
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 3, // Three columns for product name, quantity, and price
                 Dock = DockStyle.Top, // Align to the top of the parent panel
-                Margin = new Padding(0, 0, 0, 5) // Optional: Add space below each product panel
+                Margin = new Padding(0, 0, 0, 5)
             };
             productPanel.BackColor = ColorTranslator.FromHtml("#E5E3D4");
 
@@ -265,6 +274,7 @@ namespace WinFormsApp3
                 TextAlign = ContentAlignment.MiddleCenter// Space between labels
             };
 
+
             Label quantityLabel = new Label
             {
                 Text = $"{quantity}",
@@ -274,9 +284,11 @@ namespace WinFormsApp3
                 TextAlign = ContentAlignment.MiddleCenter// Space between labels
             };
 
+            decimal asd = priceDecimal * quantity;
+
             Label priceLabel = new Label
             {
-                Text = $"{priceDecimal:C}",
+                Text = $"{asd:C}",
                 Size = new Size(133, 50),
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 Margin = new Padding(5),
@@ -306,8 +318,14 @@ namespace WinFormsApp3
 
             // Update the total label
             lbl_total.Text = $"Total: {totalPrice:C}";
-
+            ttotal = totalPrice;
         }
+
+
+
+
+
+
 
         private void btnAll_Click(object sender, EventArgs e)
         {
@@ -465,8 +483,30 @@ namespace WinFormsApp3
 
         private void button23_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                Form4 form4 = new Form4(userName, userId, fname, position, _pic);
+
+                // Check if the button is enabled (i.e., the user is a developer)
+                if (button23.Enabled)
+                {
+                    // Show Form4
+                    form4.Show();
+
+                    // Close Form3
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("You do not have permission to use this feature.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void label24_Click(object sender, EventArgs e)
         {
@@ -530,6 +570,25 @@ namespace WinFormsApp3
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form balik = new Form1();
+            balik.Show();
+            this.Hide();
+        }
+        public void ReloadData()
+        {
+            // Call LoadData with no parameters to reload all products
+            LoadData();
+        }
+        private void btn_checkout_Click(object sender, EventArgs e)
+        {
+            Form check = new Form6(ttotal);
+            check.Show();
+            this.Hide();
+        }
+
     }
 
 

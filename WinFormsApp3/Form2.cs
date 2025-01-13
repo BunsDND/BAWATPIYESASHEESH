@@ -46,12 +46,12 @@ namespace WinFormsApp3
                         byte[] pic = (byte[])reader["u_image"];
 
                         // Check position and open the appropriate form
-                        if (pos.ToLower() == "admin") // Case insensitive comparison for admin
+                        if (pos.ToLower() == "admin" ) // Case insensitive comparison for admin
                         {
                             Form4 adminForm = new Form4 (u_name, u_id, name, pos, pic);
                             adminForm.Show();
                         }
-                        else if (pos.ToLower() == "cashier") // Case insensitive comparison for cashier
+                        else if (pos.ToLower() == "cashier" || pos.ToLower() == "developer") // Case insensitive comparison for cashier
                         {
                             Form3 cashierForm = new Form3(u_name, u_id, name, pos, pic,priceo );
                             cashierForm.Show();

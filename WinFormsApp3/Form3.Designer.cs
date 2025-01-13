@@ -38,6 +38,7 @@
             btnSwing = new Button();
             btnAll = new Button();
             splitContainer1 = new SplitContainer();
+            button1 = new Button();
             panel3 = new Panel();
             label18 = new Label();
             label17 = new Label();
@@ -200,6 +201,7 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = Color.LightGray;
+            splitContainer1.Panel1.Controls.Add(button1);
             splitContainer1.Panel1.Controls.Add(panel3);
             splitContainer1.Panel1.Controls.Add(label20);
             splitContainer1.Panel1.Controls.Add(label19);
@@ -231,6 +233,18 @@
             splitContainer1.SplitterDistance = 462;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.IndianRed;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.Location = new Point(164, 848);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 25;
+            button1.Text = "LOG OUT";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // panel3
             // 
@@ -282,18 +296,16 @@
             label20.AutoSize = true;
             label20.Location = new Point(324, 881);
             label20.Name = "label20";
-            label20.Size = new Size(58, 20);
+            label20.Size = new Size(0, 20);
             label20.TabIndex = 23;
-            label20.Text = "label20";
             // 
             // label19
             // 
             label19.AutoSize = true;
             label19.Location = new Point(38, 881);
             label19.Name = "label19";
-            label19.Size = new Size(58, 20);
+            label19.Size = new Size(0, 20);
             label19.TabIndex = 22;
-            label19.Text = "label19";
             // 
             // pictureBox10
             // 
@@ -531,6 +543,7 @@
             btn_checkout.TabIndex = 3;
             btn_checkout.Text = "CHECK OUT";
             btn_checkout.UseVisualStyleBackColor = false;
+            btn_checkout.Click += btn_checkout_Click;
             // 
             // panel4
             // 
@@ -689,5 +702,6 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private Panel panel4;
         private Button btn_checkout;
+        private Button button1;
     }
 }

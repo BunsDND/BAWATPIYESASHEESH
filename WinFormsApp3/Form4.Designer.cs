@@ -38,6 +38,9 @@
             btnPipe = new Button();
             btnSproket = new Button();
             btn_cash = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
             btnBolt = new Button();
             btnRimset = new Button();
             btnAll = new Button();
@@ -100,6 +103,9 @@
             panel2.Controls.Add(btnPipe);
             panel2.Controls.Add(btnSproket);
             panel2.Controls.Add(btn_cash);
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(btnBolt);
             panel2.Controls.Add(btnRimset);
             panel2.Controls.Add(btnAll);
@@ -113,22 +119,23 @@
             // 
             btnSwing.BackColor = Color.MediumPurple;
             btnSwing.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSwing.Location = new Point(48, 134);
+            btnSwing.Location = new Point(48, 104);
             btnSwing.Margin = new Padding(3, 4, 3, 4);
             btnSwing.Name = "btnSwing";
-            btnSwing.Size = new Size(141, 98);
+            btnSwing.Size = new Size(141, 68);
             btnSwing.TabIndex = 19;
             btnSwing.Text = "Swing Arm";
             btnSwing.UseVisualStyleBackColor = false;
+            btnSwing.Click += btnSwing_Click;
             // 
             // btnHandle
             // 
             btnHandle.BackColor = Color.MediumPurple;
             btnHandle.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnHandle.Location = new Point(48, 240);
+            btnHandle.Location = new Point(48, 180);
             btnHandle.Margin = new Padding(3, 4, 3, 4);
             btnHandle.Name = "btnHandle";
-            btnHandle.Size = new Size(141, 98);
+            btnHandle.Size = new Size(141, 68);
             btnHandle.TabIndex = 18;
             btnHandle.Text = "Handle Bar";
             btnHandle.UseVisualStyleBackColor = false;
@@ -138,10 +145,10 @@
             // 
             btnPipe.BackColor = Color.MediumPurple;
             btnPipe.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnPipe.Location = new Point(48, 346);
+            btnPipe.Location = new Point(48, 256);
             btnPipe.Margin = new Padding(3, 4, 3, 4);
             btnPipe.Name = "btnPipe";
-            btnPipe.Size = new Size(141, 98);
+            btnPipe.Size = new Size(141, 68);
             btnPipe.TabIndex = 17;
             btnPipe.Text = "ORBR Pipe";
             btnPipe.UseVisualStyleBackColor = false;
@@ -150,10 +157,10 @@
             // 
             btnSproket.BackColor = Color.MediumPurple;
             btnSproket.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSproket.Location = new Point(48, 452);
+            btnSproket.Location = new Point(48, 332);
             btnSproket.Margin = new Padding(3, 4, 3, 4);
             btnSproket.Name = "btnSproket";
-            btnSproket.Size = new Size(141, 98);
+            btnSproket.Size = new Size(141, 68);
             btnSproket.TabIndex = 16;
             btnSproket.Text = "Sproket";
             btnSproket.UseVisualStyleBackColor = false;
@@ -162,7 +169,7 @@
             // 
             btn_cash.BackColor = Color.Khaki;
             btn_cash.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btn_cash.Location = new Point(48, 770);
+            btn_cash.Location = new Point(48, 560);
             btn_cash.Margin = new Padding(3, 4, 3, 4);
             btn_cash.Name = "btn_cash";
             btn_cash.Size = new Size(141, 44);
@@ -170,14 +177,53 @@
             btn_cash.Text = "Cashiers";
             btn_cash.UseVisualStyleBackColor = false;
             // 
+            // button3
+            // 
+            button3.BackColor = Color.Lime;
+            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            button3.Location = new Point(48, 734);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(141, 38);
+            button3.TabIndex = 13;
+            button3.Text = "ADD EMP";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.IndianRed;
+            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            button2.Location = new Point(48, 688);
+            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Name = "button2";
+            button2.Size = new Size(141, 38);
+            button2.TabIndex = 13;
+            button2.Text = "LOG OUT";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.DeepPink;
+            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            button1.Location = new Point(48, 612);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(141, 68);
+            button1.TabIndex = 13;
+            button1.Text = "POS";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
+            // 
             // btnBolt
             // 
             btnBolt.BackColor = Color.MediumPurple;
             btnBolt.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnBolt.Location = new Point(48, 664);
+            btnBolt.Location = new Point(48, 484);
             btnBolt.Margin = new Padding(3, 4, 3, 4);
             btnBolt.Name = "btnBolt";
-            btnBolt.Size = new Size(141, 98);
+            btnBolt.Size = new Size(141, 68);
             btnBolt.TabIndex = 13;
             btnBolt.Text = "Bolt";
             btnBolt.UseVisualStyleBackColor = false;
@@ -186,10 +232,10 @@
             // 
             btnRimset.BackColor = Color.MediumPurple;
             btnRimset.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnRimset.Location = new Point(48, 558);
+            btnRimset.Location = new Point(48, 408);
             btnRimset.Margin = new Padding(3, 4, 3, 4);
             btnRimset.Name = "btnRimset";
-            btnRimset.Size = new Size(141, 98);
+            btnRimset.Size = new Size(141, 68);
             btnRimset.TabIndex = 12;
             btnRimset.Text = "Rimset";
             btnRimset.UseVisualStyleBackColor = false;
@@ -202,7 +248,7 @@
             btnAll.Location = new Point(48, 29);
             btnAll.Margin = new Padding(3, 4, 3, 4);
             btnAll.Name = "btnAll";
-            btnAll.Size = new Size(141, 97);
+            btnAll.Size = new Size(141, 67);
             btnAll.TabIndex = 0;
             btnAll.Text = "All Categories";
             btnAll.UseVisualStyleBackColor = false;
@@ -253,5 +299,8 @@
         private Button btnPipe;
         private Button btnSproket;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }

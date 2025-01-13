@@ -12,14 +12,30 @@ namespace WinFormsApp3
 {
     public partial class Form6 : Form
     {
-        public Form6()
+        public Form6(decimal total)
         {
             InitializeComponent();
+            string ttotal = total.ToString();
+            if (!decimal.TryParse(ttotal, out decimal priceDecimal))
+            {
+                MessageBox.Show("Invalid price format.");
+                return;
+            }
+
+
+            label7.Text = $"Total: {priceDecimal:C}"; ;
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form balik = new Form1();
+            balik.Show();
+            this.Close();
         }
     }
 }

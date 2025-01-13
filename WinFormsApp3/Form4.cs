@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using MySql.Data.MySqlClient;
 using Mysqlx.Notice;
 using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Math;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WinFormsApp3
@@ -25,7 +26,7 @@ namespace WinFormsApp3
         private string position;
         private byte[] _pic;// To store the logged-in user ID
         private string connectionString = "server=localhost; database=bawat_piyesa; userid=root; password=''";
-
+        private int priceo;
         private string c_name;
         private string c_id;
         private string c_rname;
@@ -37,6 +38,32 @@ namespace WinFormsApp3
         public Form4(string u_name, string u_id, string name, string pos, byte[] pic)
         {
             InitializeComponent();
+
+
+            position = pos;
+            userName = u_name; // To store the logged-in username
+            userId = u_id;
+            fname = name;
+
+            _pic = pic;
+
+
+
+            if (position.ToLower() != "developer")
+            {
+                button1.Enabled = false; // Disable the button if not a developer
+                                         // Optionally, you can hide the button
+                button1.Visible = false;
+            }
+            if (position.ToLower() != "admin" || position.ToLower() != "developer")
+            {
+                button1.Enabled = false; // Disable the button if not a developer
+                                         // Optionally, you can hide the button
+                button1.Visible = false;
+            }
+
+
+
             btnRimset.Click += (s, e) => LoadData("rimset");
             btnBolt.Click += (s, e) => LoadData("bolt");
             btnSwing.Click += (s, e) => LoadData("Swing Arm");
@@ -315,6 +342,41 @@ namespace WinFormsApp3
 
         private void btnHandle_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnSwing_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form3 cashierForm = new Form3(userName, userId, fname, position, _pic, priceo);
+            //    private string userName; // To store the logged-in username
+            //private string userId;
+            //private string fname;
+            //private string position;
+            //private byte[] _pic;// To store the logged-in user ID
+
+            cashierForm.Show();
+
+            // Close Form3
+            this.Hide();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form balik = new Form1();
+            balik.Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form kuan = new Form7();
+            kuan.Show();
 
         }
     }
